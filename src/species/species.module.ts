@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
+import { SpeciesController } from './species.controller';
 
-@Module({})
-export class SpeciesModule {}
+@Module({
+    controllers: [SpeciesController],
+})
+export class SpeciesModule {
+    // do nothing.
+}

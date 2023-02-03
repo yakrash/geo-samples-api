@@ -6,9 +6,11 @@ import { ProjectModule } from './project/project.module';
 import { SpeciesModule } from './species/species.module';
 import { SampleModule } from './sample/sample.module';
 import { AddressModule } from './address/address.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
     imports: [
+        ConfigModule.forRoot(),
         AuthModule,
         ProjectModule,
         SpeciesModule,

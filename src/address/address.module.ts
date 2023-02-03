@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
+import { AddressController } from './address.controller';
 
-@Module({})
-export class AddressModule {}
+@Module({
+    controllers: [AddressController],
+})
+export class AddressModule {
+    // do nothing.
+}
