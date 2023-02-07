@@ -7,10 +7,12 @@ import { SpeciesModule } from './species/species.module';
 import { SampleModule } from './sample/sample.module';
 import { AddressModule } from './address/address.module';
 import { ConfigModule } from '@nestjs/config';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 
 @Module({
     imports: [
         ConfigModule.forRoot(),
+        MikroOrmModule.forRoot(),
         AuthModule,
         ProjectModule,
         SpeciesModule,

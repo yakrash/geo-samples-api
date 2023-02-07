@@ -7,32 +7,40 @@ import {
     Patch,
     Post,
 } from '@nestjs/common';
-import { SampleModule } from './sample.module';
+import { CreateSampleDto } from './dto/create-sample.dto';
+import { UpdateSampleDto } from './dto/update-sample.dto';
+import { Sample } from './sample.entity';
+import { SampleService } from './sample.service';
 
 @Controller('sample')
 export class SampleController {
-    @Post('create')
-    async create(@Body() dto: Omit<SampleModule, 'id'>) {
-        // do nothing.
+    constructor(private readonly service: SampleService) {}
+
+    @Post()
+    async create(@Body() dto: CreateSampleDto): Promise<Sample> {
+        return await this.service.create(dto);
     }
 
     @Get(':id')
-    async get(@Param('id') id: string) {
-        // do nothing.
+    async get(@Param('id') id: number): Promise<Sample> {
+        return await this.service.get(id);
     }
 
     @Get('project/:id')
-    async getByProjectId(@Param('id') id: string) {
-        // do nothing.
+    async getByProjectId(@Param('id') id: number): Promise<Sample[]> {
+        return await this.service.getByProjectId(id);
     }
 
     @Patch(':id')
-    async update(@Param('id') id: string, @Body() dto: SampleModule) {
-        // do nothing.
+    async update(
+        @Param('id') id: number,
+        @Body() dto: UpdateSampleDto
+    ): Promise<Sample> {
+        return await this.service.update(id, dto);
     }
 
-    @Delete('id')
-    async delete(@Param('id') id: string) {
-        // do nothing.
+    @Delete(':id')
+    async delete(@Param('id') id: number) {
+        return await this.service.delete(id);
     }
 }

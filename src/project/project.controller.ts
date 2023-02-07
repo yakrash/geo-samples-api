@@ -7,37 +7,45 @@ import {
     Patch,
     Post,
 } from '@nestjs/common';
-import { ProjectModule } from './project.module';
+import { Project } from './project.entity';
+import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
+import { ProjectService } from './project.service';
 
 @Controller('project')
 export class ProjectController {
-    @Post('create')
-    async create(@Body() dto: Omit<ProjectModule, 'id'>) {
-        // do nothing.
+    constructor(private readonly service: ProjectService) {}
+
+    @Post()
+    async create(@Body() dto: CreateProjectDto): Promise<Project> {
+        return await this.service.create(dto);
     }
 
     @Get(':id')
-    async get(@Param('id') id: string) {
-        // do nothing.
+    async get(@Param('id') id: number): Promise<Project> {
+        return await this.service.get(id);
     }
 
     @Get()
-    async getAll() {
-        // do nothing.
+    async getAll(): Promise<Project[]> {
+        return await this.service.getAll();
     }
 
     @Get(':id/data')
-    async getProjectWithData(@Param('id') id: string) {
-        // do nothing.
+    async getProjectWithData(@Param('id') id: number) {
+        return await this.service.getProjectData(id);
     }
 
     @Patch(':id')
-    async update(@Param('id') id: string, @Body() dto: ProjectModule) {
-        // do nothing.
+    async update(
+        @Param('id') id: number,
+        @Body() dto: UpdateProjectDto
+    ): Promise<Project> {
+        return await this.service.update(id, dto);
     }
 
-    @Delete('id')
-    async delete(@Param('id') id: string) {
-        // do nothing.
+    @Delete(':id')
+    async delete(@Param('id') id: number) {
+        return await this.service.delete(id);
     }
 }
