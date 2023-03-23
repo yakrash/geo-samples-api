@@ -8,6 +8,7 @@ import { SampleModule } from './sample/sample.module';
 import { AddressModule } from './address/address.module';
 import { ConfigModule } from '@nestjs/config';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { UserModule } from './user/user.module';
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
         SpeciesModule,
         SampleModule,
         AddressModule,
+        UserModule,
     ],
     controllers: [AppController],
     providers: [AppService],

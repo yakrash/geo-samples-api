@@ -14,7 +14,9 @@ export class SampleService {
             { projectId: dto.projectId },
             { orderBy: { serial: QueryOrder.DESC } }
         );
-        dto.serial = lastSample.serial + 1;
+        let lastSerial = 0;
+        if (lastSample) lastSerial = lastSample.serial;
+        dto.serial = lastSerial + 1;
         const sample = new Sample(dto);
         await this.repo.persistAndFlush(sample);
         return sample;
