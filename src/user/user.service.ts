@@ -6,8 +6,7 @@ import { genSalt, hash } from 'bcrypt';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly repo: UserRepository) {
-    }
+    constructor(private readonly repo: UserRepository) {}
 
     async getProfile(id) {
         const profile = await this.getById(id);

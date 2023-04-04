@@ -25,7 +25,6 @@ export class SpeciesController {
         return await this.speciesService.create(dto);
     }
 
-    @Auth()
     @Get(':id')
     async get(@Param('id') id: number): Promise<Species> {
         return await this.speciesService.get(id);
