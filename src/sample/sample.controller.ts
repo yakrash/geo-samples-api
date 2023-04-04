@@ -11,11 +11,13 @@ import { CreateSampleDto } from './dto/create-sample.dto';
 import { UpdateSampleDto } from './dto/update-sample.dto';
 import { Sample } from './sample.entity';
 import { SampleService } from './sample.service';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Controller('sample')
 export class SampleController {
     constructor(private readonly service: SampleService) {}
 
+    @Auth()
     @Post()
     async create(@Body() dto: CreateSampleDto): Promise<Sample> {
         return await this.service.create(dto);
@@ -31,6 +33,7 @@ export class SampleController {
         return await this.service.getByProjectId(id);
     }
 
+    @Auth()
     @Patch(':id')
     async update(
         @Param('id') id: number,
@@ -39,6 +42,7 @@ export class SampleController {
         return await this.service.update(id, dto);
     }
 
+    @Auth()
     @Delete(':id')
     async delete(@Param('id') id: number) {
         return await this.service.delete(id);

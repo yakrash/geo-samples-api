@@ -4,11 +4,25 @@ import { Project } from '../src/project/project.entity';
 import { Species } from '../src/species/species.entity';
 import { Address } from '../src/address/address.entity';
 import { Sample } from '../src/sample/sample.entity';
+import { User } from '../src/user/user.entity';
 
 export class InitSeeder extends Seeder {
     async run(em: EntityManager): Promise<void> {
+        em.create(User, {
+            name: 'Admin',
+            isAdmin: true,
+            email: 'kraash@bk.ru',
+            password:
+                '$2b$10$FwrRwZK3lT9Lmw4ubLB4weT2Td9BVjBmlQX4JI1FuM0XGnh8Ubax2',
+        });
+
         em.create(Project, {
             name: 'Первый',
+            userId: 1,
+        });
+
+        em.create(Project, {
+            name: 'Новый 2023',
             userId: 1,
         });
 

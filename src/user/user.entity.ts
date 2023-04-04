@@ -10,6 +10,11 @@ import { UserRepository } from './user.repository';
 export class User {
     [EntityRepositoryType]?: UserRepository;
 
+    constructor({ email, password }) {
+        this.email = email;
+        this.password = password;
+    }
+
     @PrimaryKey()
     id: number;
 
@@ -18,4 +23,10 @@ export class User {
 
     @Property()
     password: string;
+
+    @Property({ default: false })
+    isAdmin?: boolean;
+
+    @Property({ nullable: true })
+    name?: string;
 }

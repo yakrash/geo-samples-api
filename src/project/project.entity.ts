@@ -1,10 +1,12 @@
 import {
     Entity,
     EntityRepositoryType,
+    ManyToOne,
     PrimaryKey,
     Property,
 } from '@mikro-orm/core';
 import { ProjectRepository } from './project.repository';
+import { User } from '../user/user.entity';
 
 @Entity({ customRepository: () => ProjectRepository })
 export class Project {
@@ -21,6 +23,6 @@ export class Project {
     @Property()
     name: string;
 
-    @Property()
+    @ManyToOne(() => User, { name: 'user_id', mapToPk: true })
     userId: number;
 }
