@@ -6,6 +6,6 @@ export class AppService {
     constructor(private readonly env: ConfigService) {}
 
     getHello(): string {
-        return `Hello World! ${this.env.get('TEST')}`;
+        return `Hello World! ${this.env.get('NODE_ENV')}`;
     }
 }

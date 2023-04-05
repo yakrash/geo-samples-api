@@ -1,28 +1,28 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20230401150934 extends Migration {
+export class Migration20230405062217 extends Migration {
     async up(): Promise<void> {
         this.addSql(
-            'create table "species" ("id" serial primary key, "name" varchar(255) not null);'
+            'create table "species" ("id" serial primary key, "name" varchar(255) not null, "created_at" timestamptz(0) not null, "updated_at" timestamptz(0) not null);'
         );
 
         this.addSql(
-            'create table "user" ("id" serial primary key, "email" varchar(255) not null, "password" varchar(255) not null, "is_admin" boolean null default false, "name" varchar(255) null);'
+            'create table "user" ("id" serial primary key, "email" varchar(255) not null, "password" varchar(255) not null, "is_admin" boolean null default false, "name" varchar(255) null, "created_at" timestamptz(0) not null, "updated_at" timestamptz(0) not null);'
         );
         this.addSql(
             'alter table "user" add constraint "user_email_unique" unique ("email");'
         );
 
         this.addSql(
-            'create table "project" ("id" serial primary key, "name" varchar(255) not null, "user_id" int not null);'
+            'create table "project" ("id" serial primary key, "name" varchar(255) not null, "user_id" int not null, "created_at" timestamptz(0) not null, "updated_at" timestamptz(0) not null);'
         );
 
         this.addSql(
-            'create table "sample" ("id" serial primary key, "name" varchar(255) null, "serial" int not null, "project_id" int not null);'
+            'create table "sample" ("id" serial primary key, "name" varchar(255) null, "serial" int not null, "project_id" int not null, "created_at" timestamptz(0) not null, "updated_at" timestamptz(0) not null);'
         );
 
         this.addSql(
-            'create table "address" ("id" serial primary key, "species_id" int not null, "sample_id" int not null, "project_id" int not null, "slide" int not null, "glass" int not null);'
+            'create table "address" ("id" serial primary key, "species_id" int not null, "sample_id" int not null, "project_id" int not null, "slide" int not null, "glass" int not null, "created_at" timestamptz(0) not null, "updated_at" timestamptz(0) not null);'
         );
 
         this.addSql(

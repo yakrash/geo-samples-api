@@ -37,4 +37,5 @@ lerna-debug.log*
 /postgres-data
 
 .env
+.prod.env
 /temp/

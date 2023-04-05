@@ -19,4 +19,10 @@ export class Species {
 
     @Property()
     name: string;
+
+    @Property()
+    createdAt = new Date();
+
+    @Property({ onUpdate: () => new Date() })
+    updatedAt = new Date();
 }

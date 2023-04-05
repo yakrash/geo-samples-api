@@ -30,4 +30,10 @@ export class Sample {
 
     @ManyToOne(() => Project, { name: 'project_id', mapToPk: true })
     projectId: number;
+
+    @Property()
+    createdAt = new Date();
+
+    @Property({ onUpdate: () => new Date() })
+    updatedAt = new Date();
 }

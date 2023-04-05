@@ -29,4 +29,10 @@ export class User {
 
     @Property({ nullable: true })
     name?: string;
+
+    @Property()
+    createdAt = new Date();
+
+    @Property({ onUpdate: () => new Date() })
+    updatedAt = new Date();
 }
