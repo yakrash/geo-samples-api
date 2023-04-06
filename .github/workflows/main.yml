@@ -1,0 +1,26 @@
+name: Deploy application
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script_stop: true
+          script: |
+            cd app/geo-samples-api/
+            git pull https://${{ secrets.USER }}:${{ secrets.DESC }}@github.com/${{ secrets.USER }}/geo-samples-api
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm ci
+            npm run build
+            pm2 restart api
