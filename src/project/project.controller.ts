@@ -19,7 +19,7 @@ export class ProjectController {
 
     @Auth()
     @Post()
-    async create(@Body() dto: CreateProjectDto): Promise<Project> {
+    async create(@Body() dto: CreateProjectDto): Promise<Project[]> {
         return await this.service.create(dto);
     }
 
@@ -46,7 +46,7 @@ export class ProjectController {
     async update(
         @Param('id') id: number,
         @Body() dto: UpdateProjectDto
-    ): Promise<Project> {
+    ): Promise<Project[]> {
         return await this.service.update(id, dto);
     }
 

@@ -91,6 +91,7 @@ export class AuthService {
 
     private getUserWithoutPass(user: User) {
         return {
+            id: user.id,
             email: user.email,
             isAdmin: user.isAdmin,
             name: user.name,

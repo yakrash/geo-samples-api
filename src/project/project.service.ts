@@ -21,7 +21,7 @@ export class ProjectService {
         private readonly sampleRepo: EntityRepository<Sample>
     ) {}
 
-    async create(dto: CreateProjectDto): Promise<Project> {
+    async create(dto: CreateProjectDto): Promise<Project[]> {
         const project = new Project(dto);
         await this.repo.persistAndFlush(project);
 
@@ -31,7 +31,7 @@ export class ProjectService {
             projectId: project.id,
         });
         await this.sampleRepo.persistAndFlush(sample);
-        return project;
+        return this.repo.find({ userId: dto.userId });
     }
 
     async get(id: number): Promise<Project> {
@@ -54,7 +54,7 @@ export class ProjectService {
         return { project, addresses, species, samples };
     }
 
-    async update(id: number, dto: UpdateProjectDto): Promise<Project> {
+    async update(id: number, dto: UpdateProjectDto): Promise<Project[]> {
         const project = await this.repo.findOne(id);
         if (!project) {
             throw new HttpException('Not found', HttpStatus.NOT_FOUND);
@@ -62,14 +62,12 @@ export class ProjectService {
         project.name = dto.name;
         await this.repo.flush();
 
-        return project;
+        return this.repo.find({ userId: project.userId });
     }
 
     async delete(id: number) {
-        const project = await this.repo.nativeDelete({ id });
-        if (!project) {
-            throw new HttpException('Not found', HttpStatus.NOT_FOUND);
-        }
-        return project;
+        await this.addressRepo.nativeDelete({ projectId: id });
+        await this.sampleRepo.nativeDelete({ projectId: id });
+        await this.repo.nativeDelete({ id });
     }
 }

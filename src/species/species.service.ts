@@ -34,7 +34,7 @@ export class SpeciesService {
         Object.assign(species, dto);
         await this.repo.flush();
 
-        return species;
+        return this.repo.findAll();
     }
 
     async delete(id: number) {

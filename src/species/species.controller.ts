@@ -41,7 +41,7 @@ export class SpeciesController {
     async update(
         @Param('id') id: number,
         @Body() dto: SpeciesDto
-    ): Promise<Species> {
+    ): Promise<Species[]> {
         return await this.speciesService.update(id, dto);
     }
 
