@@ -9,7 +9,7 @@ import { Project } from '../project/project.entity';
 import { SpeciesRepository } from '../species/species.repository';
 import { SampleRepository } from './sample.repository';
 
-@Entity({ customRepository: () => SampleRepository })
+@Entity({ customRepository: () => SampleRepository, tableName: 'samples' })
 export class Sample {
     [EntityRepositoryType]?: SpeciesRepository;
 

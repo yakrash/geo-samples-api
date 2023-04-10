@@ -10,7 +10,7 @@ import { Sample } from '../sample/sample.entity';
 import { Project } from '../project/project.entity';
 import { AddressRepository } from './address.repository';
 
-@Entity({ customRepository: () => AddressRepository })
+@Entity({ customRepository: () => AddressRepository, tableName: 'addresses' })
 export class Address {
     [EntityRepositoryType]?: AddressRepository;
 

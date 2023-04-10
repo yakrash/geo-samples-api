@@ -130,7 +130,7 @@
           "mappedType": "datetime"
         }
       },
-      "name": "user",
+      "name": "users",
       "schema": "public",
       "indexes": [
         {
@@ -138,12 +138,12 @@
             "email"
           ],
           "composite": false,
-          "keyName": "user_email_unique",
+          "keyName": "users_email_unique",
           "primary": false,
           "unique": true
         },
         {
-          "keyName": "user_pkey",
+          "keyName": "users_pkey",
           "columnNames": [
             "id"
           ],
@@ -205,11 +205,11 @@
           "mappedType": "datetime"
         }
       },
-      "name": "project",
+      "name": "projects",
       "schema": "public",
       "indexes": [
         {
-          "keyName": "project_pkey",
+          "keyName": "projects_pkey",
           "columnNames": [
             "id"
           ],
@@ -220,16 +220,16 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "project_user_id_foreign": {
-          "constraintName": "project_user_id_foreign",
+        "projects_user_id_foreign": {
+          "constraintName": "projects_user_id_foreign",
           "columnNames": [
             "user_id"
           ],
-          "localTableName": "public.project",
+          "localTableName": "public.projects",
           "referencedColumnNames": [
             "id"
           ],
-          "referencedTableName": "public.user",
+          "referencedTableName": "public.users",
           "updateRule": "cascade"
         }
       }
@@ -293,11 +293,11 @@
           "mappedType": "datetime"
         }
       },
-      "name": "sample",
+      "name": "samples",
       "schema": "public",
       "indexes": [
         {
-          "keyName": "sample_pkey",
+          "keyName": "samples_pkey",
           "columnNames": [
             "id"
           ],
@@ -308,16 +308,16 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "sample_project_id_foreign": {
-          "constraintName": "sample_project_id_foreign",
+        "samples_project_id_foreign": {
+          "constraintName": "samples_project_id_foreign",
           "columnNames": [
             "project_id"
           ],
-          "localTableName": "public.sample",
+          "localTableName": "public.samples",
           "referencedColumnNames": [
             "id"
           ],
-          "referencedTableName": "public.project",
+          "referencedTableName": "public.projects",
           "updateRule": "cascade"
         }
       }
@@ -399,11 +399,11 @@
           "mappedType": "datetime"
         }
       },
-      "name": "address",
+      "name": "addresses",
       "schema": "public",
       "indexes": [
         {
-          "keyName": "address_pkey",
+          "keyName": "addresses_pkey",
           "columnNames": [
             "id"
           ],
@@ -414,40 +414,40 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "address_species_id_foreign": {
-          "constraintName": "address_species_id_foreign",
+        "addresses_species_id_foreign": {
+          "constraintName": "addresses_species_id_foreign",
           "columnNames": [
             "species_id"
           ],
-          "localTableName": "public.address",
+          "localTableName": "public.addresses",
           "referencedColumnNames": [
             "id"
           ],
           "referencedTableName": "public.species",
           "updateRule": "cascade"
         },
-        "address_sample_id_foreign": {
-          "constraintName": "address_sample_id_foreign",
+        "addresses_sample_id_foreign": {
+          "constraintName": "addresses_sample_id_foreign",
           "columnNames": [
             "sample_id"
           ],
-          "localTableName": "public.address",
+          "localTableName": "public.addresses",
           "referencedColumnNames": [
             "id"
           ],
-          "referencedTableName": "public.sample",
+          "referencedTableName": "public.samples",
           "updateRule": "cascade"
         },
-        "address_project_id_foreign": {
-          "constraintName": "address_project_id_foreign",
+        "addresses_project_id_foreign": {
+          "constraintName": "addresses_project_id_foreign",
           "columnNames": [
             "project_id"
           ],
-          "localTableName": "public.address",
+          "localTableName": "public.addresses",
           "referencedColumnNames": [
             "id"
           ],
-          "referencedTableName": "public.project",
+          "referencedTableName": "public.projects",
           "updateRule": "cascade"
         }
       }

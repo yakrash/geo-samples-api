@@ -1,11 +1,14 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { Species } from './species.entity';
 import { SpeciesRepository } from './species.repository';
 import { SpeciesDto } from './dto/species.dto';
+import { logger } from '@mikro-orm/nestjs';
 
 @Injectable()
 export class SpeciesService {
     constructor(private readonly repo: SpeciesRepository) {}
+
+    private readonly logger = new Logger(SpeciesService.name);
 
     async get(id: number): Promise<Species> {
         const species = await this.repo.findOne(id);
@@ -38,10 +41,18 @@ export class SpeciesService {
     }
 
     async delete(id: number) {
-        const species = await this.repo.nativeDelete({ id });
-        if (!species) {
-            throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+        try {
+            const species = await this.repo.nativeDelete({ id });
+            if (!species) {
+                throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+            }
+            return species;
+        } catch (e) {
+            logger.error(e.message);
+            throw new HttpException(
+                e.message,
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
         }
-        return species;
     }
 }

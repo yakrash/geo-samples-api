@@ -8,7 +8,7 @@ import {
 import { ProjectRepository } from './project.repository';
 import { User } from '../user/user.entity';
 
-@Entity({ customRepository: () => ProjectRepository })
+@Entity({ customRepository: () => ProjectRepository, tableName: 'projects' })
 export class Project {
     [EntityRepositoryType]?: ProjectRepository;
 
